@@ -1,0 +1,287 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #0f172a;
+    color: #e2e8f0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #1e293b;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #60a5fa;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #94a3b8;
+}
+
+.last-updated {
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+/* Account Summary */
+.account-summary {
+    margin-bottom: 30px;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.metric-card {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+}
+
+.metric-label {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.metric-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #e2e8f0;
+}
+
+.metric-value.positive {
+    color: #22c55e;
+}
+
+.metric-value.negative {
+    color: #ef4444;
+}
+
+/* Strategies Section */
+.strategies {
+    margin-bottom: 30px;
+}
+
+.strategy-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.strategy-group {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.strategy-group label {
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+#instrumentSelect {
+    padding: 10px 15px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    color: #e2e8f0;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#instrumentSelect:focus {
+    outline: none;
+    border-color: #60a5fa;
+}
+
+.strategy-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    background: #1e293b;
+    border: 2px solid #334155;
+    border-radius: 8px;
+    color: #e2e8f0;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.strategy-btn:hover {
+    background: #334155;
+    border-color: #60a5fa;
+    transform: translateY(-2px);
+}
+
+.strategy-btn:active {
+    transform: translateY(0);
+}
+
+.strategy-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.strategy-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.strategy-desc {
+    font-size: 0.875rem;
+    color: #94a3b8;
+}
+
+.strategy-result {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background: #1e293b;
+}
+
+.strategy-result.hidden {
+    display: none;
+}
+
+.strategy-result.success {
+    border-color: #22c55e;
+    background: rgba(34, 197, 94, 0.1);
+}
+
+.strategy-result.error {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.strategy-result.info {
+    border-color: #60a5fa;
+    background: rgba(96, 165, 250, 0.1);
+}
+
+/* Tables */
+.positions, .trades {
+    margin-bottom: 30px;
+}
+
+.table-container {
+    overflow-x: auto;
+    background: #1e293b;
+    border-radius: 8px;
+    border: 1px solid #334155;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #0f172a;
+}
+
+th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+td {
+    padding: 15px;
+    border-top: 1px solid #334155;
+}
+
+tbody tr:hover {
+    background: rgba(96, 165, 250, 0.05);
+}
+
+.no-data {
+    text-align: center;
+    color: #64748b;
+    font-style: italic;
+}
+
+.direction-long {
+    color: #22c55e;
+    font-weight: 600;
+}
+
+.direction-short {
+    color: #ef4444;
+    font-weight: 600;
+}
+
+.status-open {
+    color: #60a5fa;
+}
+
+.status-closed {
+    color: #94a3b8;
+}
+
+.pnl-positive {
+    color: #22c55e;
+    font-weight: 600;
+}
+
+.pnl-negative {
+    color: #ef4444;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .strategy-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    table {
+        font-size: 0.875rem;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+}

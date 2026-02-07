@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forex Trading Dashboard</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Forex Trading Dashboard</h1>
+            <div class="last-updated">Last updated: <span id="lastUpdate">--</span></div>
+        </header>
+
+        <!-- Account Summary Section -->
+        <section class="account-summary">
+            <h2>Account Summary</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Balance</div>
+                    <div class="metric-value" id="balance">$0.00</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Equity</div>
+                    <div class="metric-value" id="equity">$0.00</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Unrealized P&L</div>
+                    <div class="metric-value" id="unrealizedPL">$0.00</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Today's P&L</div>
+                    <div class="metric-value" id="todayPL">$0.00</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Margin Used</div>
+                    <div class="metric-value" id="marginUsed">$0.00</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Open Trades</div>
+                    <div class="metric-value" id="openTrades">0</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Execution Section -->
+        <section class="strategies">
+            <h2>Execute Strategies</h2>
+            <div class="strategy-buttons">
+                <div class="strategy-group">
+                    <label for="instrumentSelect">Select Pair:</label>
+                    <select id="instrumentSelect">
+                        <option value="EUR_USD">EUR/USD</option>
+                        <option value="GBP_USD">GBP/USD</option>
+                        <option value="USD_JPY">USD/JPY</option>
+                        <option value="AUD_USD">AUD/USD</option>
+                        <option value="USD_CAD">USD/CAD</option>
+                        <option value="EUR_GBP">EUR/GBP</option>
+                        <option value="GBP_JPY">GBP/JPY</option>
+                        <option value="EUR_JPY">EUR/JPY</option>
+                    </select>
+                </div>
+                <button class="strategy-btn" data-strategy="scalping">
+                    <span class="strategy-name">Scalping</span>
+                    <span class="strategy-desc">5-10 pips, 5min chart</span>
+                </button>
+                <button class="strategy-btn" data-strategy="breakout">
+                    <span class="strategy-name">Breakout</span>
+                    <span class="strategy-desc">1:2-1:3 RR, 15min chart</span>
+                </button>
+                <button class="strategy-btn" data-strategy="range_trading">
+                    <span class="strategy-name">Range Trading</span>
+                    <span class="strategy-desc">1:1 RR, 1hr chart</span>
+                </button>
+                <button class="strategy-btn" data-strategy="trend_following">
+                    <span class="strategy-name">Trend Following</span>
+                    <span class="strategy-desc">1.5:1 RR, 15min chart</span>
+                </button>
+            </div>
+            <div id="strategyResult" class="strategy-result hidden"></div>
+        </section>
+
+        <!-- Open Positions Section -->
+        <section class="positions">
+            <h2>Open Positions</h2>
+            <div class="table-container">
+                <table id="positionsTable">
+                    <thead>
+                        <tr>
+                            <th>Instrument</th>
+                            <th>Long Units</th>
+                            <th>Short Units</th>
+                            <th>Unrealized P&L</th>
+                            <th>Margin Used</th>
+                        </tr>
+                    </thead>
+                    <tbody id="positionsBody">
+                        <tr>
+                            <td colspan="5" class="no-data">No open positions</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Recent Trades Section -->
+        <section class="trades">
+            <h2>Recent Trades</h2>
+            <div class="table-container">
+                <table id="tradesTable">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Instrument</th>
+                            <th>Direction</th>
+                            <th>Units</th>
+                            <th>Entry Price</th>
+                            <th>Exit Price</th>
+                            <th>P&L</th>
+                            <th>Status</th>
+                            <th>Strategy</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tradesBody">
+                        <tr>
+                            <td colspan="9" class="no-data">No recent trades</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

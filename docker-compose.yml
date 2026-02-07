@@ -1,0 +1,65 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: trading_db
+    environment:
+      POSTGRES_DB: trading_db
+      POSTGRES_USER: trading_user
+      POSTGRES_PASSWORD: trading_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U trading_user -d trading_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: trading_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  web:
+    build: .
+    container_name: trading_web
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=run.py
+      - FLASK_ENV=${FLASK_ENV:-development}
+      - SECRET_KEY=${SECRET_KEY}
+      - DATABASE_URL=postgresql://trading_user:trading_pass@db:5432/trading_db
+      - FOREX_USERNAME=${FOREX_USERNAME}
+      - FOREX_PASSWORD=${FOREX_PASSWORD}
+      - FOREX_APPKEY=${FOREX_APPKEY}
+      - DEFAULT_RISK_PERCENT=${DEFAULT_RISK_PERCENT:-1.0}
+      - MAX_DAILY_LOSS_PERCENT=${MAX_DAILY_LOSS_PERCENT:-3.0}
+      - TRADING_PAIRS=${TRADING_PAIRS:-EUR_USD,GBP_USD,USD_JPY}
+      - MAX_CONCURRENT_POSITIONS=${MAX_CONCURRENT_POSITIONS:-3}
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - .:/app
+    command: >
+      sh -c "
+        flask db upgrade 2>/dev/null || (flask db init && flask db migrate -m 'Initial migration' && flask db upgrade) &&
+        gunicorn --bind 0.0.0.0:5000 --workers 2 --timeout 120 --reload run:app
+      "
+
+volumes:
+  postgres_data:
+  redis_data:

@@ -1,10 +1,10 @@
-# Forex Trading Platform
+# Forex Testing Platform
 
-A Python/Flask-based forex trading platform for testing day trading strategies on Forex.com demo accounts.
+A Python/Flask-based forex testing platform for testing day testing strategies on Forex.com demo accounts.
 
 ## Features
 
-- **Four Trading Strategies**:
+- **Four Testing Strategies**:
   - Scalping (5-10 pips, 5-minute charts)
   - Breakout (1:2-1:3 RR, 15-minute charts)
   - Range Trading (1:1 RR, 1-hour charts)
